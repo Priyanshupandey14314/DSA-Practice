@@ -22,7 +22,7 @@ public class MaxSubArraySumBF {
         return maxSum;
     }
     public static void main(String[] args) {
-        int arr[] = {-2,4,5,-8,6,3};
+        int arr[] = {-28,-7,-25,-25,-19,-9,-9,-2,-20,-27};
         int res = maxSubArraySum(arr);
         System.out.println("Max Subarray sum is :"+res);
 
