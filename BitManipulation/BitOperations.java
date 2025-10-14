@@ -1,4 +1,4 @@
-package BitManipulation;
+// package BitManipulation;
 public class BitOperations {
     // Getting ith bit in binary
 
@@ -18,10 +18,21 @@ public class BitOperations {
     public static int clearIthBit(int n, int pos){
         return n & ~(1<<pos);
     }
-    public static void main(String[] args) {
+    // Update ith bit
+    public static int updateIthBit(int n, int pos, int newBit){
+         n = clearIthBit(n, pos);
+        return n | (newBit<<pos);
+    }
+    // Clear last i bits
+    public static int clearLastIbits(int n, int i){
+        return n & (~0)<<i;
+    }
+        public static void main(String[] args) {
         System.out.println(getIthBit(10, 3));
         System.out.println(setIthBit(10, 2));
         System.out.println(clearIthBit(10, 1));
+        System.out.println(updateIthBit(10, 2, 1));
+        System.out.println(clearLastIbits(15, 2));
         System.out.println("Done");
     }
 }
