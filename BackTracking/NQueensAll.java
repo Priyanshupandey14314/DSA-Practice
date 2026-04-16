@@ -6,9 +6,9 @@ public class NQueensAll {
         }
         for(int j=0;j<board.length;j++){
             if(isSafe(board, row, j)){
-                board[row][j] = 'Q';
-                NQueen(board, row+1);
-                board[row][j] = 'x';
+                board[row][j] = 'Q'; //fix
+                NQueen(board, row+1); // explore
+                board[row][j] = 'x';// backtrack
             }
             
         }
