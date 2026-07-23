@@ -13,6 +13,7 @@ public class LinkedListCreation {
 
     public static Node head;
     public static Node tail;
+     public static int size = 0; // maintain size
 
     public void addFirst(int data) {
 
@@ -20,11 +21,13 @@ public class LinkedListCreation {
 
         if (head == null) {
             head = tail = nd;
+            size++;
             return;
         }
 
         nd.next = head;
         head = nd;
+        size++;
     }
 
     public void addLast(int data) {
@@ -33,11 +36,13 @@ public class LinkedListCreation {
 
         if (head == null) {
             head = tail = newNode;
+            size++;
             return;
         }
 
         tail.next = newNode;
         tail = newNode;
+        size++;
     }
 
     public void print() {
@@ -57,6 +62,10 @@ public class LinkedListCreation {
         System.out.println("null");
     }
     public void add(int idx, int data){
+        if(idx == 0){
+            addFirst(data);
+            return;
+        }
         Node newNode = new Node(data);
         Node temp = head;
         int i = 0;
@@ -67,6 +76,7 @@ public class LinkedListCreation {
         // i = idx-1 temp->prev
         newNode.next = temp.next;
         temp.next = newNode;
+        size++;
          
     }
     public int getSize(Node head){
@@ -78,12 +88,58 @@ public class LinkedListCreation {
         return size;
     }
     public int removeFirst(){
+        if(size==0){return -1;}
         int val = head.data;
         head = head.next;
+        size--;
         return val;
     }
     public int removeLast(){
-        
+        if(size == 0) return -1;
+        else if(size==1){
+            int val = head.data;
+            head=tail=null;
+            size=0;
+            return val;
+        }
+        Node temp = head;
+        int i=0;
+        while(i<size-2){
+            temp = temp.next;
+            i++;
+        }
+        int val = temp.next.data;
+        temp.next=null;
+        tail = temp;
+        return val;
+    }
+    public int search(int key){
+        Node temp = head;
+        int i=0;
+        while(temp!=null){
+            if(temp.data==key){
+                return i;
+            }
+            temp=temp.next;
+            i++;
+        }
+        return -1;
+    }
+    public int helper(Node head, int key){
+        if(head == null){
+            return -1;
+        }
+        if(head.data == key){
+            return 0;
+        }
+        int idx = helper(head.next, key);
+        if(idx == -1){
+            return -1;
+        }
+        return idx+1;
+    }
+    public int recSearch(int key){
+        return helper(head,key);
     }
 
     public static void main(String[] args) {
@@ -101,5 +157,11 @@ public class LinkedListCreation {
         System.out.println(size);
         ll.removeFirst();
         ll.print();
+        ll.removeLast();
+        ll.print();
+        int search = ll.search(5);
+        System.out.println(search);
+        int recS = ll.recSearch(3);
+        System.out.println(recS);
     }
 }
